@@ -1,0 +1,8 @@
+venv/
+setup.cmd
+all voices/
+__pycache__/
+*.py[cod]
+*.egg-info/
+.DS_Store
+.env
