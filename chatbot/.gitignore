@@ -1,0 +1,8 @@
+venv/
+Analysis_txt - 複製.bat
+setup.cmd
+__pycache__/
+*.py[cod]
+*.egg-info/
+.DS_Store
+.env

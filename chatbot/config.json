@@ -1,0 +1,10 @@
+{
+    "openai_api_key": "please-input-your-api-key",
+    "model_name": "gpt-4.1-nano",
+    "distance_threshold": 0.4,
+    "preference_distance_threshold": 0.8,
+    "trigger_keywords": ["回憶", "記得嗎", "你還記得", "上次說到", "關於那件", "提醒我", "之前", "名字", "愛", "喜歡", "討厭"],
+    "importance_threshold": 5.0,
+    "top_k_to_write": 5,
+    "postprocess_with_llm": false
+}
