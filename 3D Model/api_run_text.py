@@ -46,7 +46,7 @@ def find_project_root() -> str | None:
 def main():
     project_root = find_project_root()
     if not project_root:
-        print("❌ 找不到專案根目錄（需包含 demo/images）。可：")
+        print(" 找不到專案根目錄（需包含 demo/images）。可：")
         print("  1) 把這個腳本放在 Hunyuan3D-2 專案內或其父資料夾，或")
         print("  2) 設定環境變數 HY3D_ROOT 指向 Hunyuan3D-2，例如：")
         print(r"     set HY3D_ROOT=C:\Users\B310\Hunyuan3D-2")
@@ -73,12 +73,12 @@ def main():
         glob(os.path.join(image_dir, "*.bmp"))
     )
     if not img_paths:
-        print(f"⚠️ 找不到任何圖片。請把 .jpg/.png 放到：{image_dir}")
+        print(f" 找不到任何圖片。請把 .jpg/.png 放到：{image_dir}")
         return
 
-    print(f"📦 本次輸出資料夾：{output_dir}")
-    print(f"🧩 固定輸出格式：{OUTPUT_FORMAT}（含材質：{WITH_TEXTURE}）")
-    print(f"🔗 本機生成端點：{API_URL}")
+    print(f"本次輸出資料夾：{output_dir}")
+    print(f"固定輸出格式：{OUTPUT_FORMAT}（含材質：{WITH_TEXTURE}）")
+    print(f"本機生成端點：{API_URL}")
 
     # 批次處理
     for idx, img_path in enumerate(img_paths, start=1):
@@ -90,17 +90,17 @@ def main():
         try:
             Image.open(img_path).close()
         except UnidentifiedImageError:
-            print(f"❌ 圖片格式不支援：{img_path}，跳過")
+            print(f"圖片格式不支援：{img_path}，跳過")
             continue
         except Exception as e:
-            print(f"❌ 圖片 {img_path} 無法開啟（{e}），跳過")
+            print(f"圖片 {img_path} 無法開啟（{e}），跳過")
             continue
 
         # 轉 base64（本機通常不需壓縮；若仍遇到 413 再說）
         with open(img_path, "rb") as f:
             img_b64 = base64.b64encode(f.read()).decode("utf-8")
 
-        print(f"\n🖼️ 處理圖片 {img_path} ➜ {out_path}")
+        print(f"\n 處理圖片 {img_path} ➜ {out_path}")
 
         payload = {
             "image": img_b64,
@@ -118,15 +118,15 @@ def main():
                 timeout=600,
             )
         except requests.exceptions.RequestException as e:
-            print("❌ 無法連線到本機生成服務：", e)
+            print("無法連線到本機生成服務：", e)
             return
 
         if resp.status_code == 200:
             with open(out_path, "wb") as f:
                 f.write(resp.content)
-            print(f"✅ 已儲存為：{out_path}")
+            print(f"已儲存為：{out_path}")
         else:
-            print(f"❌ 生成服務錯誤（{resp.status_code}）：{img_path}")
+            print(f"生成服務錯誤（{resp.status_code}）：{img_path}")
             try:
                 print("回應：", resp.json())
             except Exception:
