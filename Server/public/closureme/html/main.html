@@ -1,0 +1,157 @@
+<!-- main.html -->
+<!DOCTYPE html>
+<html lang="zh-Hant">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ClosureMe</title>
+  <link rel="stylesheet" href="../css/characters.css">
+  <link rel="stylesheet" href="../css/toast.css">
+  <link rel="stylesheet" href="../css/guide.css">
+  <link rel="stylesheet" href="../css/main.css">
+  <link rel="stylesheet" href="../css/waiting.css" />
+</head>
+
+<body>
+  <header class="top-bar">
+    <div class="logo">
+      <img src="../../assets/icons/raw (4).png" class="logo-img">
+      <button id="logoutBtn" class="logout-btn">返回首頁</button>
+    </div>
+  </header>
+
+  <main class="main-container">
+    <section class="display-area"></section>
+
+    <section class="select-area">
+      <div class="select-group">
+        <div class="select-header">人物選擇 <span id="char-count">0/3</span></div>
+        <div class="select-scroll" id="char-scroll"></div>
+      </div>
+
+      <div class="select-group">
+        <div class="select-header">場景選擇 <span id="scene-count">0/3</span></div>
+        <div class="select-scroll" id="scene-scroll"></div>
+      </div>
+
+      <button id="imageBtn" class="image-btn">🛠️ 初始模型</button>
+      <button id="skeletonBtn" class="skeleton-btn" onclick="window.open('https://www.mixamo.com/#/', '_blank');">🦴
+        製作骨架</button>
+      <button id="filesBtn" class="files-btn" onclick="location.href='files.html'">📁 檔案管理</button>
+      <button id="generateBtn" class="generate-btn">▶ 開始生成</button>
+
+    </section>
+  </main>
+
+  <div id="guideModal" class="modal">
+    <div class="modal-content" id="guideContent"></div>
+  </div>
+
+  <div id="uploadModal" class="upload-modal">
+    <div class="upload-content">
+      <h2 id="upload-title">圖片上傳 1/3</h2>
+
+      <div class="upload-main">
+        <div id="upload-step-content">
+        </div>
+      </div>
+
+      <div class="upload-controls">
+        <button id="upload-prev">◀</button>
+        <button id="upload-next">▶</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="previewModal" class="modal">
+    <div class="modal-content preview-modal-content">
+      <img id="previewImg" src="" alt="預覽圖片" />
+    </div>
+  </div>
+
+  <div class="filename-modal" id="filenameModal" style="display: none;">
+    <div class="filename-content">
+      <h3>請輸入檔案名稱</h3>
+      <input type="text" class="filename-input" id="filenameInput" placeholder="未命名" />
+      <div class="filename-buttons">
+        <button class="filename-cancel" id="filenameCancel">取消</button>
+        <button class="filename-confirm" id="filenameConfirm">確認</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="descModal" class="desc-modal">
+    <div class="modal-content">
+      <span class="close-btn">&times;</span>
+      <pre id="descFullText"></pre>
+    </div>
+  </div>
+
+  <div id="splitModal" class="modal" style="display: none;">
+    <div class="modal-box">
+      <div class="split-image-area">
+        <canvas id="splitCanvas"></canvas>
+        <div id="splitCutLine" class="split-line"></div>
+        <div id="splitPercent" class="split-percent">50%</div>
+      </div>
+
+      <div class="split-preview-container">
+        <div>
+          <strong>上半部（Head）</strong>
+          <img id="headPreview" class="preview-img" />
+        </div>
+        <div>
+          <strong>下半部（Body）</strong>
+          <img id="bodyPreview" class="preview-img" />
+        </div>
+      </div>
+
+      <div class="split-toolbar">
+        <span>800 × 450</span>
+        <div class="button-group">
+          <button id="btnHalf">切一半</button>
+          <button id="btnOneThird">切 1/3</button>
+          <button id="btnTwoThird">切 2/3</button>
+          <button id="confirmSplitBtn" class="confirm">確定上傳</button>
+          <button id="cancelSplitBtn" class="cancel">取消</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const helpBtn = document.getElementById("helpBtn");
+    const guideModal = document.getElementById("guideModal");
+    const guideContent = document.getElementById("guideContent");
+
+    helpBtn.addEventListener("click", () => {
+      fetch("guide.html")
+        .then(res => res.text())
+        .then(html => {
+          guideContent.innerHTML = html;
+          guideModal.style.display = "flex";
+
+          const guideScript = document.createElement("script");
+          guideScript.src = "../js/guide.js";
+          guideScript.onload = () => {
+            initGuideModal();
+          };
+          document.body.appendChild(guideScript);
+
+          guideModal.addEventListener("click", (e) => {
+            if (e.target === guideModal) {
+              guideModal.style.display = "none";
+            }
+          });
+        });
+    });
+  </script>
+  <div id="toast" class="toast"></div>
+  <script src="/utils/toast.js"></script>
+  <script type="module" src="../js/main.js"></script>
+  <script type="module" src="../js/waiting.js"></script>
+
+</body>
+
+</html>

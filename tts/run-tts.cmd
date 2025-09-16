@@ -8,7 +8,7 @@ set "BASE=%~dp0"
 set "PORT=5009"
 set "OUT_WAV=%BASE%out\output.wav"
 set "REF_WAV=%BASE%voices\huei_aunt.aac"
-set "AUDIO_URL_BASE=http://192.168.1.102:5009/audio"  rem ← 對外可連的網址（請修改）
+set "AUDIO_URL_BASE=http://122.100.76.28:80/audio"  rem ← 對外可連的網址（請修改）
 set "WARMUP_ENABLE=1"
 set "WARMUP_TEXT=嗨"
 

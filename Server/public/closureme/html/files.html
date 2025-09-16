@@ -1,0 +1,78 @@
+<!-- files.html -->
+<!DOCTYPE html>
+<html lang="zh-Hant">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>檔案管理</title>
+    <link rel="stylesheet" href="../css/toast.css">
+    <link rel="stylesheet" href="../css/guide.css">
+    <link rel="stylesheet" href="../css/files.css">
+    <link rel="icon" href="https://closureme-assets.s3.ap-east-2.amazonaws.com/favicon.ico" type="image/x-icon">
+</head>
+
+<body>
+    <header class="top-bar">
+        <div class="logo">
+            <img src="../../assets/icons/file-title.png" class="files_tittle">
+            <img src="../../assets/icons/help-icon.png" id="helpBtn" class="help-icon">
+            <button id="goHomeBtn" class="logout-btn">上一頁</button>
+        </div>
+        <div class="filter-bar">
+            <input type="text" id="searchInput" placeholder="搜尋角色名稱...">
+            <select id="sortSelect">
+                <option value="time_desc">上傳時間（最新）</option>
+                <option value="time_asc">上傳時間（最舊）</option>
+                <option value="name_asc">名稱（A 至 Z）</option>
+                <option value="name_desc">名稱（Z 至 A）</option>
+            </select>
+        </div>
+
+    </header>
+
+
+    <main class="main-container">
+        <div id="fileCards" class="file-card-container"></div>
+    </main>
+
+
+    <div id="guideModal" class="modal">
+        <div class="modal-content" id="guideContent"></div>
+    </div>
+
+    <script>
+        const helpBtn = document.getElementById("helpBtn");
+        const guideModal = document.getElementById("guideModal");
+        const guideContent = document.getElementById("guideContent");
+
+        helpBtn.addEventListener("click", () => {
+            fetch("guide.html")
+                .then(res => res.text())
+                .then(html => {
+                    guideContent.innerHTML = html;
+                    guideModal.style.display = "flex";
+
+                    const guideScript = document.createElement("script");
+                    guideScript.src = "../js/guide.js";
+                    guideScript.onload = () => {
+                        initGuideModal();
+                    };
+                    document.body.appendChild(guideScript);
+
+                    guideModal.addEventListener("click", (e) => {
+                        if (e.target === guideModal) {
+                            guideModal.style.display = "none";
+                        }
+                    });
+                });
+        });
+    </script>
+
+    <div id="toast" class="toast"></div>
+    <script src="/utils/toast.js"></script>
+    <script type="module" src="../js/files.js"></script>
+
+</body>
+
+</html>

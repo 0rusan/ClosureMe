@@ -1,0 +1,748 @@
+<!doctype html>
+<html lang="zh-Hant">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>ClosureMe</title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: "#B86B2F",
+                        brandGreen: "#3B6B59",
+                        ivory: "#F7F0E3",
+                        sienna: "#A0522D"
+                    },
+                    fontFamily: {
+                        display: ["Playfair Display", "serif"],
+                        body: ["Noto Sans TC", "Inter", "sans-serif"]
+                    }
+                }
+            }
+        }
+    </script>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;600&family=Playfair+Display:wght@700&display=swap"
+        rel="stylesheet">
+
+    <style>
+        html {
+            scroll-behavior: smooth;
+        }
+
+        .menu-card {
+            width: 14rem;
+            border-radius: 0.75rem;
+            background-color: #ffffff;
+            box-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05), 0 4px 12px rgb(0 0 0 / 0.08);
+            border: 1px solid rgb(0 0 0 / 0.05);
+            overflow: hidden;
+            z-index: 60;
+        }
+
+        .menu-item {
+            width: 100%;
+            text-align: left;
+            padding: 0.5rem 1rem;
+            font-size: 0.95rem;
+            line-height: 1.5rem;
+            background: #ffffff;
+            transition: background-color 0.15s ease;
+        }
+
+        .menu-item:hover {
+            background: #F7F0E3;
+        }
+
+        #userMenu {
+            overflow: visible;
+        }
+
+        .toast {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: #333;
+            color: #fff;
+            padding: 12px 20px;
+            border-radius: 8px;
+            opacity: 0;
+            transition: opacity 0.3s;
+            z-index: 1000;
+            font-weight: 600;
+        }
+
+        .toast.show {
+            opacity: 1;
+        }
+    </style>
+</head>
+
+<body class="bg-ivory font-body">
+    <header id="siteHeader" class="fixed top-0 inset-x-0 z-50 flex items-center justify-between px-6 py-4
+                 bg-transparent transition-colors duration-300">
+        <div class="flex items-center h-28">
+            <img src="assets/icons/raw (4).png" alt="ClosureMe" class="h-full w-auto object-contain">
+        </div>
+
+        <nav id="siteNav" class="flex items-center gap-10">
+            <a href="#about" class="nav-link text-white hover:text-brandGreen">系統簡介</a>
+            <a href="#features" class="nav-link text-white hover:text-brandGreen">特色功能</a>
+            <a href="#question" class="nav-link text-white hover:text-brandGreen">常見問題</a>
+            <a href="#guide" class="nav-link text-white hover:text-brandGreen">使用說明</a>
+            <a href="#contact" class="nav-link text-white hover:text-brandGreen">聯絡我們</a>
+
+            <div id="authArea" class="relative"></div>
+        </nav>
+    </header>
+
+    <section id="top" class="relative min-h-screen flex items-center justify-center text-center">
+        <div class="absolute inset-0">
+            <img src="assets/pictures/background.png" alt="" class="w-full h-full object-cover">
+            <div class="absolute inset-0 bg-black/50"></div>
+        </div>
+
+        <div class="relative z-10 max-w-3xl px-4">
+            <h1 class="font-display text-6xl md:text-7xl text-white font-bold">ClosureMe</h1>
+            <p class="mt-6 text-lg md:text-xl text-white/90">
+                AI 驅動的角色互動平台，將記憶與情感融入你的專屬角色
+            </p>
+            <div class="mt-8">
+                <a id="ctaStart" href="#"
+                    class="inline-block rounded-xl bg-brandGreen text-white px-8 py-3 font-medium hover:opacity-90">
+                    開始使用
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- 系統簡介 -->
+    <section id="about" class="py-28 bg-white text-brand scroll-mt-28 md:scroll-mt-32">
+        <div class="max-w-6xl mx-auto px-6">
+
+            <div class="grid md:grid-cols-3 gap-10 items-center">
+                <div class="md:col-span-2">
+                    <h2 class="text-4xl border-b-2 font-semibold mb-10 text-brand pb-3">ClosureMe 是什麼</h2>
+                    <p class="text-lg leading-relaxed text-gray-600">
+                        一套結合 AI 與 3D 技術的沉浸式互動系統，能自動生成角色模型，並模擬對話與聲音<br>
+                        透過回憶的紀錄與再現，讓使用者在專屬的數位場景中，重新體驗並延續珍貴的情感記憶
+                    </p>
+
+                    <p class="text-lg leading-relaxed text-gray-600 mt-4">
+                        不僅是科技的應用，更是一座情感橋樑，陪伴使用者再次聆聽熟悉的聲音、重現溫暖的互動<br>
+                        在這裡，回憶不會隨時間消逝，而能以嶄新形式被保存與延續，帶來慰藉與心靈完整
+                    </p>
+
+                    <blockquote
+                        class="mt-8 text-center italic text-2xl md:text-2xl font-semibold text-brandGreen leading-snug">
+                        「讓回憶不只是想起，而是能再次擁有」
+                    </blockquote>
+                </div>
+
+                <div class="flex justify-center">
+                    <img src="/assets/pictures/VR.png" alt="ClosureMe 互動示意"
+                        class="w-72 h-auto rounded-full object-cover" />
+                </div>
+            </div>
+
+            <div class="mt-10 grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                <div class="rounded-xl bg-white ring-1 ring-black/10 p-5">
+                    <div class="text-3xl">👤</div>
+                    <h3 class="mt-3 font-semibold text-gray-900">3D 角色生成</h3>
+                    <p class="mt-1 text-sm text-gray-600">上傳照片即可自動生成 3D 模型</p>
+                </div>
+
+                <div class="rounded-xl bg-white ring-1 ring-black/10 p-5">
+                    <div class="text-3xl">💬</div>
+                    <h3 class="mt-3 font-semibold text-gray-900">AI 對話與記憶</h3>
+                    <p class="mt-1 text-sm text-gray-600">模擬情感與記憶，能持續累積對話並回應</p>
+                </div>
+
+                <div class="rounded-xl bg-white ring-1 ring-black/10 p-5">
+                    <div class="text-3xl">🎙️</div>
+                    <h3 class="mt-3 font-semibold text-gray-900">聲音辨識與模仿</h3>
+                    <p class="mt-1 text-sm text-gray-600">結合 STT/TTS，重現熟悉的語氣與聲線</p>
+                </div>
+
+                <div class="rounded-xl bg-white ring-1 ring-black/10 p-5">
+                    <div class="text-3xl">📂</div>
+                    <h3 class="mt-3 font-semibold text-gray-900">回憶檔案保存</h3>
+                    <p class="mt-1 text-sm text-gray-600">模型與記憶檔皆可留存，隨時重返重要時刻</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- 特色功能 -->
+    <section id="features" class="py-16 bg-ivory text-brand scroll-mt-28 md:scroll-mt-32">
+        <div class="max-w-screen-2xl mx-auto px-4">
+            <h2 class="text-4xl font-semibold mb-6 text-brand text-left">
+                為什麼選擇 ClosureMe
+            </h2>
+
+            <div id="feature-slider" class="relative w-full overflow-visible" role="region"
+                aria-roledescription="carousel" aria-label="ClosureMe 特色功能" aria-live="off">
+
+                <div
+                    class="relative w-full overflow-hidden ring-1 ring-black/5 shadow-lg rounded-xl bg-gradient-to-br from-white via-gray-50 to-gray-200">
+                    <div class="relative w-full h-[680px] md:h-[580px] sm:h-[360px]">
+                        <div
+                            class="slides absolute inset-0 flex transition-transform duration-500 ease-out will-change-transform">
+                            <div class="w-full shrink-0 basis-full flex items-center justify-center">
+                                <img src="/assets/pictures/p1.png" alt="安全與隱私保障視覺"
+                                    class="block w-full h-full object-cover md:object-contain select-none pointer-events-none"
+                                    fetchpriority="high" />
+                            </div>
+                            <div class="w-full shrink-0 basis-full flex items-center justify-center">
+                                <img src="/assets/pictures/p2.png" alt="專屬個人化視覺"
+                                    class="block w-full h-full object-cover md:object-contain select-none pointer-events-none"
+                                    loading="lazy" decoding="async" />
+                            </div>
+                            <div class="w-full shrink-0 basis-full flex items-center justify-center">
+                                <img src="/assets/pictures/p3.png" alt="精緻建模與場景視覺"
+                                    class="block w-full h-full object-cover md:object-contain select-none pointer-events-none"
+                                    loading="lazy" decoding="async" />
+                            </div>
+                            <div class="w-full shrink-0 basis-full flex items-center justify-center">
+                                <img src="/assets/pictures/p4.png" alt="VR 體驗視覺"
+                                    class="block w-full h-full object-cover md:object-contain select-none pointer-events-none"
+                                    loading="lazy" decoding="async" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <button id="prevBtn" aria-label="上一張" class="group absolute top-1/2 -translate-y-1/2 -left-28 md:-left-24 sm:-left-12
+         w-20 h-20 sm:w-14 sm:h-14 rounded-full bg-white/90 shadow-2xl hover:bg-white
+         flex items-center justify-center transition">
+                    <span class="inline-block text-5xl sm:text-3xl text-brand group-hover:scale-125 transition"
+                        aria-hidden="true">❮</span>
+                </button>
+
+                <button id="nextBtn" aria-label="下一張" class="group absolute top-1/2 -translate-y-1/2 -right-28 md:-right-24 sm:-right-12
+         w-20 h-20 sm:w-14 sm:h-14 rounded-full bg-white/90 shadow-xl hover:bg-white
+         flex items-center justify-center transition">
+                    <span class="inline-block text-3xl sm:text-3xl text-brand group-hover:scale-125 transition"
+                        aria-hidden="true">❯</span>
+                </button>
+
+                <div class="dots flex justify-center mt-5 space-x-2" aria-label="切換特色功能"></div>
+            </div>
+        </div>
+
+        <script>
+                (function () {
+                    const slider = document.getElementById("feature-slider");
+                    const track = slider.querySelector(".slides");
+                    const frames = Array.from(track.children);
+                    const prevBtn = document.getElementById("prevBtn");
+                    const nextBtn = document.getElementById("nextBtn");
+                    const dotsWrap = slider.querySelector(".dots");
+
+                    const dots = frames.map((_, i) => {
+                        const b = document.createElement("button");
+                        b.type = "button";
+                        b.className =
+                            "dot w-3 h-3 rounded-full bg-gray-400 aria-[current=true]:bg-brandGreen " +
+                            "focus:outline-none focus-visible:ring-2 focus-visible:ring-brandGreen";
+                        b.setAttribute("aria-label", "第 " + (i + 1) + " 張");
+                        b.addEventListener("click", () => { go(i); restart(); });
+                        dotsWrap.appendChild(b);
+                        return b;
+                    });
+
+                    let current = 0;
+                    const total = frames.length;
+
+                    function syncDots() {
+                        dots.forEach((d, i) => d.setAttribute("aria-current", String(i === current)));
+                    }
+
+                    function go(i) {
+                        current = (i + total) % total;
+                        track.style.transform = `translateX(-${current * 100}%)`;
+                        syncDots();
+                    }
+
+                    slider.addEventListener("keydown", (e) => {
+                        switch (e.key) {
+                            case "ArrowLeft": e.preventDefault(); go(current - 1); restart(); break;
+                            case "ArrowRight": e.preventDefault(); go(current + 1); restart(); break;
+                            case "Home": e.preventDefault(); go(0); restart(); break;
+                            case "End": e.preventDefault(); go(total - 1); restart(); break;
+                        }
+                    });
+
+                    prevBtn.addEventListener("click", () => { go(current - 1); restart(); });
+                    nextBtn.addEventListener("click", () => { go(current + 1); restart(); });
+
+                    let touchX = null;
+                    slider.addEventListener("touchstart", (e) => { touchX = e.touches[0].clientX; }, { passive: true });
+                    slider.addEventListener("touchend", (e) => {
+                        if (touchX == null) return;
+                        const dx = e.changedTouches[0].clientX - touchX;
+                        if (Math.abs(dx) > 40) {
+                            if (dx > 0) go(current - 1); else go(current + 1);
+                            restart();
+                        }
+                        touchX = null;
+                    }, { passive: true });
+
+                    const INTERVAL = 7000;
+                    let timer = null;
+                    const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+                    function start() { if (!reduced) { stop(); timer = setInterval(() => go(current + 1), INTERVAL); } }
+                    function stop() { if (timer) { clearInterval(timer); timer = null; } }
+                    function restart() { start(); }
+
+                    slider.addEventListener("mouseenter", stop);
+                    slider.addEventListener("mouseleave", start);
+                    slider.addEventListener("focusin", stop);
+                    slider.addEventListener("focusout", start);
+                    document.addEventListener("visibilitychange", () => { document.hidden ? stop() : start(); });
+
+                    go(0);
+                    start();
+                })();
+        </script>
+    </section>
+
+
+
+    <!-- 常見問題 -->
+    <section id="question" class="py-20 bg-[#F9FAFB] scroll-mt-28 md:scroll-mt-32">
+        <div class="max-w-6xl mx-auto px-6">
+            <h2 class="text-4xl font-semibold mb-8 border-b-2 pb-3" style="color:#B86B2F; border-color:#E2E8F0;">
+                常見問題
+            </h2>
+
+            <div id="faq-accordion" class="space-y-5">
+                <div class="rounded-xl border shadow-sm hover:shadow-md transition-shadow"
+                    style="background:#EEF2F6; border-color:#E2E8F0;">
+                    <button type="button" class="w-full flex items-center justify-between px-6 py-6 md:py-7 min-h-[72px]
+                 text-left font-semibold focus:outline-none text-[18px] leading-8
+                 transition" style="color:#3B3B75;" aria-expanded="false" aria-controls="faq1"
+                        onclick="toggleFAQ(this)">
+                        <span>Q1：ClosureMe 適合那些人使用？</span>
+                        <svg class="h-6 w-6 transition-transform duration-300" viewBox="0 0 20 20" fill="currentColor"
+                            aria-hidden="true" style="color:#6B7280;">
+                            <path fill-rule="evenodd"
+                                d="M7.21 14.77a.75.75 0 0 1 0-1.06L10.92 10 7.2 6.29A.75.75 0 1 1 8.26 5.2l4.24 4.24a1 1 0 0 1 0 1.41l-4.24 4.24a.75.75 0 0 1-1.06 0Z"
+                                clip-rule="evenodd" />
+                        </svg>
+                    </button>
+                    <div id="faq1" class="faq-panel overflow-hidden"
+                        style="max-height:0; opacity:0; transform:translateY(4px); transition: all .45s ease;">
+                        <div class="px-6 py-6 text-[18px] leading-relaxed font-medium"
+                            style="color:#4B5563; border-top:1px solid #E2E8F0;">
+                            本系統適用於有情感療癒需求的人，無論是因重大變故或親人離世而承受心理創傷、在生活與人際中需要情緒抒發的人，或是高齡及記憶衰退者，都能透過熟悉的對話與場景獲得安慰與支持。
+                        </div>
+                    </div>
+                </div>
+
+                <div class="rounded-xl border shadow-sm hover:shadow-md transition-shadow"
+                    style="background:#F8FAFC; border-color:#E2E8F0;">
+                    <button type="button" class="w-full flex items-center justify-between px-6 py-6 md:py-7 min-h-[72px]
+                 text-left font-semibold focus:outline-none text-[18px] leading-8
+                 transition" style="color:#3B3B75;" aria-expanded="false" aria-controls="faq2"
+                        onclick="toggleFAQ(this)">
+                        <span>Q2：我可以自訂場景或背景嗎？</span>
+                        <svg class="h-6 w-6 transition-transform duration-300" viewBox="0 0 20 20" fill="currentColor"
+                            aria-hidden="true" style="color:#6B7280;">
+                            <path fill-rule="evenodd"
+                                d="M7.21 14.77a.75.75 0 0 1 0-1.06L10.92 10 7.2 6.29A.75.75 0 1 1 8.26 5.2l4.24 4.24a1 1 0 0 1 0 1.41l-4.24 4.24a.75.75 0 0 1-1.06 0Z"
+                                clip-rule="evenodd" />
+                        </svg>
+                    </button>
+                    <div id="faq2" class="faq-panel overflow-hidden"
+                        style="max-height:0; opacity:0; transform:translateY(4px); transition: all .45s ease;">
+                        <div class="px-6 py-6 text-[18px] leading-relaxed font-medium"
+                            style="color:#4B5563; border-top:1px solid #E2E8F0;">
+                            系統內建多個場景（圖書館、公園、會議室等），您可選擇使用，未來將提供「自訂場景上傳」功能。
+                        </div>
+                    </div>
+                </div>
+
+                <div class="rounded-xl border shadow-sm hover:shadow-md transition-shadow"
+                    style="background:#EEF2F6; border-color:#E2E8F0;">
+                    <button type="button" class="w-full flex items-center justify-between px-6 py-6 md:py-7 min-h-[72px]
+                 text-left font-semibold focus:outline-none text-[18px] leading-8
+                 transition" style="color:#3B3B75;" aria-expanded="false" aria-controls="faq3"
+                        onclick="toggleFAQ(this)">
+                        <span>Q3：上傳的檔案會被刪除或過期嗎？</span>
+                        <svg class="h-6 w-6 transition-transform duration-300" viewBox="0 0 20 20" fill="currentColor"
+                            aria-hidden="true" style="color:#6B7280;">
+                            <path fill-rule="evenodd"
+                                d="M7.21 14.77a.75.75 0 0 1 0-1.06L10.92 10 7.2 6.29A.75.75 0 1 1 8.26 5.2l4.24 4.24a1 1 0 0 1 0 1.41l-4.24 4.24a.75.75 0 0 1-1.06 0Z"
+                                clip-rule="evenodd" />
+                        </svg>
+                    </button>
+                    <div id="faq3" class="faq-panel overflow-hidden"
+                        style="max-height:0; opacity:0; transform:translateY(4px); transition: all .45s ease;">
+                        <div class="px-6 py-6 text-[18px] leading-relaxed font-medium"
+                            style="color:#4B5563; border-top:1px solid #E2E8F0;">
+                            您的檔案會安全儲存在 AWS S3 雲端，不會自動過期，也可隨時刪除或下載屬於自己的檔案。
+                        </div>
+                    </div>
+                </div>
+
+                <div class="rounded-xl border shadow-sm hover:shadow-md transition-shadow"
+                    style="background:#F8FAFC; border-color:#E2E8F0;">
+                    <button type="button" class="w-full flex items-center justify-between px-6 py-6 md:py-7 min-h-[72px]
+                   text-left font-semibold focus:outline-none text-[18px] leading-8
+                   transition" style="color:#3B3B75;" aria-expanded="false" aria-controls="faq2"
+                        onclick="toggleFAQ(this)">
+                        <span>Q4：為什麼要演奏春日影？</span>
+                        <svg class="h-6 w-6 transition-transform duration-300" viewBox="0 0 20 20" fill="currentColor"
+                            aria-hidden="true" style="color:#6B7280;">
+                            <path fill-rule="evenodd"
+                                d="M7.21 14.77a.75.75 0 0 1 0-1.06L10.92 10 7.2 6.29A.75.75 0 1 1 8.26 5.2l4.24 4.24a1 1 0 0 1 0 1.41l-4.24 4.24a.75.75 0 0 1-1.06 0Z"
+                                clip-rule="evenodd" />
+                        </svg>
+                    </button>
+                    <div id="faq2" class="faq-panel overflow-hidden"
+                        style="max-height:0; opacity:0; transform:translateY(4px); transition: all .45s ease;">
+                        <div class="px-6 py-6 text-[18px] leading-relaxed font-medium"
+                            style="color:#4B5563; border-top:1px solid #E2E8F0;">
+                            <img src="/assets/pictures/Mygo.png"
+                                class="rounded-lg shadow-md max-w-full h-auto border border-gray-200">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        function toggleFAQ(btn) {
+            const panel = btn.nextElementSibling;
+            const svg = btn.querySelector('svg');
+            const expanded = btn.getAttribute('aria-expanded') === 'true';
+            const container = document.getElementById('faq-accordion');
+
+            closeOthers(container, panel);
+
+            if (expanded) {
+                collapse(panel, btn, svg);
+            } else {
+                expand(panel, btn, svg);
+            }
+        }
+
+        function closeOthers(container, exceptPanel) {
+            container.querySelectorAll('.faq-panel').forEach(p => {
+                if (p !== exceptPanel && p.style.maxHeight && p.style.maxHeight !== '0px') {
+                    const b = p.previousElementSibling;
+                    const s = b.querySelector('svg');
+                    collapse(p, b, s);
+                }
+            });
+        }
+
+        function expand(panel, btn, svg) {
+            panel.style.maxHeight = panel.scrollHeight + 'px';
+            panel.style.opacity = '1';
+            panel.style.transform = 'translateY(0)';
+
+            btn.setAttribute('aria-expanded', 'true');
+            svg.style.transform = 'rotate(90deg)';
+            svg.style.color = '#B86B2F';
+        }
+
+        function collapse(panel, btn, svg) {
+            panel.style.maxHeight = '0px';
+            panel.style.opacity = '0';
+            panel.style.transform = 'translateY(4px)';
+
+            btn.setAttribute('aria-expanded', 'false');
+            svg.style.transform = 'rotate(0deg)';
+            svg.style.color = '#6B7280';
+        }
+    </script>
+
+
+    <!-- 使用說明 -->
+    <section id="guide" class="py-28 bg-ivory text-brand scroll-mt-28 md:scroll-mt-32">
+        <div class="max-w-5xl mx-auto px-4">
+            <h2 class="text-3xl font-semibold mb-8 text-brand">使用說明</h2>
+
+            <div
+                class="flex items-center gap-6 w-full p-6 bg-white rounded-xl shadow-lg hover:shadow-xl transition border border-gray-200">
+
+                <div class="flex-shrink-0 w-16 h-16 bg-red-100 flex items-center justify-center rounded-lg">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-9 w-9 text-red-500" fill="currentColor"
+                        viewBox="0 0 24 24">
+                        <path d="M14 2H6a2 2 0 00-2 2v16c0 
+                   1.1.9 2 2 2h12a2 2 0 002-2V8l-6-6zm2 
+                   18H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 
+                   9H13z" />
+                    </svg>
+                </div>
+
+                <div class="flex-1">
+                    <p class="font-medium text-brand font-semibold hover:underline">使用者操作說明.pdf</p>
+                    <p class="text-sm text-gray-500 font-semibold">檔案大小：約 2.3 MB</p>
+                </div>
+
+                <div class="flex gap-3">
+                    <a href="assets/pictures/image.png" target="_blank"
+                        class="px-5 py-2 rounded-lg bg-brandGreen text-white text-sm font-semibold hover:opacity-90">
+                        開啟
+                    </a>
+                    <a href="assets/pictures/image.png" download="image.png"
+                        class="px-5 py-2 rounded-lg bg-brand text-white text-sm font-semibold hover:opacity-90">
+                        下載
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 聯絡我們 -->
+    <section id="contact" class="py-20 bg-white text-brand scroll-mt-28 md:scroll-mt-32">
+        <div class="max-w-7xl mx-auto px-6 lg:px-10 grid md:grid-cols-2 gap-12 items-center">
+
+            <div class="w-full h-[400px] overflow-hidden rounded-xl shadow-lg">
+                <img src="/assets/pictures/draw.png" alt="Contact Us" class="w-full h-full object-cover object-left">
+            </div>
+
+            <div class="space-y-6 ml-32">
+                <h2 class="text-4xl font-semibold text-brand border-b border-gray-200 pb-2">聯絡我們</h2>
+                <p class="text-lg text-brand mt-4">若有任何疑問，歡迎與我們聯繫：</p>
+
+                <div>
+                    <p class="font-semibold text-brand">地址</p>
+                    <p class="text-gray-800">251 新北市淡水區英專路151號</p>
+                </div>
+
+                <div>
+                    <p class="font-semibold text-brand">電話</p>
+                    <p class="text-gray-800">(123) 456-7890</p>
+                </div>
+
+                <div>
+                    <p class="font-semibold text-brand">信箱</p>
+                    <p class="text-gray-800">tku411630000@gmail.com</p>
+                </div>
+                <div></div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-brand text-white py-6">
+        <div class="max-w-7xl mx-auto px-6">
+            <p class="text-sm text-center">&copy; 2025 ClosureMe. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <div id="toast" class="toast"></div>
+    <script src="/utils/toast.js"></script>
+    <script>
+        (function () {
+            const LOGIN_URL = "/auth/html/login.html";
+            const APP_URL = "/closureme/html/main.html";
+            const AUTH_PREFIX = "Bearer ";
+
+            async function checkAuthOnServer() {
+                const token = localStorage.getItem("token");
+                if (!token) return { ok: false };
+
+                try {
+                    const res = await fetch("/api/auth/me", {
+                        method: "GET",
+                        headers: {
+                            "Authorization": AUTH_PREFIX + token,
+                            "Cache-Control": "no-store"
+                        }
+                    });
+                    if (!res.ok) {
+                        localStorage.removeItem("token");
+                        localStorage.removeItem("username");
+                        return { ok: false };
+                    }
+                    const data = await res.json().catch(() => ({}));
+                    const uname = data?.username || data?.user?.username || localStorage.getItem("username") || "用戶";
+                    localStorage.setItem("username", uname);
+                    return { ok: true, username: uname };
+                } catch (err) {
+                    return { ok: false };
+                }
+            }
+
+            const header = document.getElementById('siteHeader');
+            const navLinks = document.querySelectorAll('#siteNav .nav-link');
+            const hero = document.querySelector('#top');
+
+            function setOnHero() {
+                header.classList.remove('bg-gray-200/90', 'backdrop-blur', 'shadow');
+                document.querySelectorAll('#siteNav .nav-link').forEach(a => {
+                    a.classList.add('text-white');
+                    a.classList.remove('text-brand');
+                });
+            }
+
+            function setOffHero() {
+                header.classList.add('bg-gray-200/90', 'backdrop-blur', 'shadow');
+                document.querySelectorAll('#siteNav .nav-link').forEach(a => {
+                    a.classList.remove('text-white');
+                    a.classList.add('text-brand');
+                });
+            }
+            const io = new IntersectionObserver(
+                (entries) => entries.forEach(entry => {
+                    if (entry.isIntersecting && entry.intersectionRatio > 0.2) setOnHero();
+                    else setOffHero();
+                }),
+                { threshold: [0, 0.2, 0.6, 1] }
+            );
+            if (hero) io.observe(hero);
+            if (window.scrollY > 10) setOffHero();
+
+            const authArea = document.getElementById("authArea");
+
+            function renderLoggedOut() {
+                authArea.innerHTML = `
+          <a id="btnLogin" href="${LOGIN_URL}"
+             class="inline-flex items-center justify-center rounded-lg bg-brandGreen text-white px-4 py-2 text-sm font-medium hover:opacity-90">
+            登入
+          </a>`;
+                const btnLogin = document.getElementById("btnLogin");
+                btnLogin.addEventListener("click", () => {
+                    try { localStorage.setItem("postLoginRedirect", "/"); } catch { }
+                });
+            }
+
+            function renderLoggedIn(username) {
+                authArea.innerHTML = `
+    <div class="relative" id="userMenuRoot">
+      <a id="userMenuBtn"
+         class="nav-link inline-flex items-center gap-1 cursor-pointer">
+        用戶：${username || "用戶"}
+        <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none">
+          <path d="M19 9l-7 7-7-7" stroke="currentColor" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </a>
+
+      <!-- 主選單 -->
+      <div id="userMenu" class="menu-card absolute right-0 mt-2 hidden z-50">
+
+        <!-- 個人設定（先不做實作） -->
+        <button class="menu-item" data-action="profile">個人設定</button>
+
+        <!-- 語言（點擊展開左側子選單） -->
+        <button class="menu-item flex items-center justify-between" data-action="toggle-lang">
+          <span>語言</span>
+          <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none">
+            <path d="M9 5l7 7-7 7" stroke="currentColor" stroke-width="2"
+                  stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </button>
+
+        <!-- 子選單：在左側展開 -->
+        <div id="langMenu"
+             class="menu-card absolute right-full top-12 mr-2 mt-[-8px] hidden z-50">
+          <button class="menu-item" data-lang="zh-TW" data-label="繁體中文">繁體中文</button>
+          <button class="menu-item" data-lang="en"    data-label="English">English</button>
+          <button class="menu-item" data-lang="ja"    data-label="日本語">日本語</button>
+        </div>
+
+        <hr class="my-1" style="border-color:#F0E9DB;">
+        <button class="menu-item text-red-600" data-action="logout">登出</button>
+      </div>
+    </div>`;
+
+                const root = document.getElementById("userMenuRoot");
+                const btn = document.getElementById("userMenuBtn");
+                const menu = document.getElementById("userMenu");
+                const langM = document.getElementById("langMenu");
+
+                btn.addEventListener("click", (e) => {
+                    e.preventDefault(); e.stopPropagation();
+                    menu.classList.toggle("hidden");
+                    if (!menu.classList.contains("hidden")) {
+                        document.addEventListener("click", closeAll, { once: true });
+                    }
+                });
+
+                root.addEventListener("click", (e) => {
+                    const el = e.target.closest("button.menu-item");
+                    if (!el) return;
+
+                    e.preventDefault(); e.stopPropagation();
+
+                    if (el.dataset.action === "toggle-lang") {
+                        langM.classList.toggle("hidden");
+                        if (!langM.classList.contains("hidden")) {
+                            document.addEventListener("click", closeLang, { once: true });
+                        }
+                        return;
+                    }
+
+                    if (el.dataset.action === "profile") {
+                        showToast("功能維護中", "info");
+                        closeAll();
+                        return;
+                    }
+
+                    if (el.dataset.action === "logout") {
+                        localStorage.removeItem("token");
+                        localStorage.removeItem("username");
+                        location.href = "/";
+                        return;
+                    }
+
+                    if (el.dataset.lang) {
+                        showToast(`「${el.dataset.label}」尚未開放`, "info");
+                        closeAll();
+                    }
+                });
+
+                function closeLang() { langM.classList.add("hidden"); }
+                function closeAll() { closeLang(); menu.classList.add("hidden"); }
+
+                if (window.scrollY > 10) {
+                    document.querySelectorAll('#siteNav .nav-link').forEach(a => {
+                        a.classList.remove('text-white'); a.classList.add('text-brand');
+                    });
+                } else {
+                    document.querySelectorAll('#siteNav .nav-link').forEach(a => {
+                        a.classList.add('text-white'); a.classList.remove('text-brand');
+                    });
+                }
+            }
+
+            const ctaStart = document.getElementById("ctaStart");
+            ctaStart.addEventListener("click", async (e) => {
+                e.preventDefault();
+                const auth = await checkAuthOnServer();
+                if (!auth.ok) {
+                    try { localStorage.setItem("postLoginRedirect", "/"); } catch { }
+                    location.href = `${LOGIN_URL}?redirect=/`;
+                } else {
+                    location.href = APP_URL;
+                }
+            });
+
+            (async () => {
+                const auth = await checkAuthOnServer();
+                if (auth.ok) renderLoggedIn(auth.username);
+                else renderLoggedOut();
+            })();
+
+        })();
+    </script>
+</body>
+
+</html>

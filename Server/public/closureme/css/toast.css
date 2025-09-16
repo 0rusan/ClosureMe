@@ -1,0 +1,24 @@
+/* =========================================================
+   [Toast 提示]
+   ========================================================= */
+.toast {
+  position: fixed;
+  bottom: 30px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #333;
+  color: white;
+  padding: 12px 24px;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: bolder;
+  z-index: 99999;
+  opacity: 0;
+  transition: opacity 0.4s, bottom 0.4s;
+  pointer-events: none;
+}
+
+.toast.show {
+  opacity: 1;
+  bottom: 50px;
+}
