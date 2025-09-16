@@ -1,0 +1,278 @@
+/* 全局樣式 */
+body {
+    margin: 0;
+    font-family: "Segoe UI", sans-serif;
+    background-color: #faf3e8;
+    color: #333;
+}
+
+/* 頂部工具列 */
+.top-bar {
+    background-color: #fff7eb;
+    padding: 4px 36px 8px;
+    border-bottom: 2px solid #e0d7ca;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+}
+
+.help-icon {
+    height: 25px;
+    width: 25px;
+    margin-left: 8px;
+    margin-top: 28px;
+    cursor: pointer;
+}
+
+.main-container {
+    padding: 25px;
+}
+
+/* 表格基礎設定 */
+.file-table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: #fffefb;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+.file-table thead {
+    background-color: #e2ceb3;
+    color: #333;
+}
+
+.file-table th,
+.file-table td {
+    padding: 14px 28px;
+    /* 增加左右距離 */
+    font-size: 16px;
+    border-bottom: 1px solid #e8e2d9;
+    white-space: nowrap;
+    text-align: center;
+}
+
+/* 指定欄寬 */
+.file-table th:nth-child(2),
+.file-table td:nth-child(2) {
+    min-width: 200px;
+}
+
+.file-table th:nth-child(4),
+.file-table td:nth-child(4) {
+    min-width: 160px;
+}
+
+/* 表頭樣式 */
+.file-table thead th {
+    font-weight: bold;
+    cursor: pointer;
+    position: relative;
+    padding-right: 20px;
+}
+
+/* 排序圖示 */
+.file-table thead th span.sort-icon::after {
+    content: "⮃";
+    margin-left: 6px;
+    color: #6c5b3d;
+    opacity: 0.6;
+}
+
+/* hover 標題時箭頭高亮 */
+.file-table thead th:hover span.sort-icon::after {
+    color: #333;
+    opacity: 1;
+}
+
+/* 點擊後箭頭 */
+.file-table thead th.sort-asc span.sort-icon::after {
+    content: "▲";
+    color: #333;
+}
+
+.file-table thead th.sort-desc span.sort-icon::after {
+    content: "▼";
+    color: #333;
+}
+
+/* hover 效果 */
+.file-table tbody tr:hover {
+    background-color: #fff4e6;
+}
+
+/* 動作欄樣式 */
+.file-table td a {
+    color: #805c2c;
+    font-weight: 500;
+    text-decoration: none;
+    margin: 0 6px;
+    transition: color 0.2s ease;
+}
+
+.file-table td a:hover {
+    color: #4b3621;
+    text-decoration: underline;
+}
+
+.file-table td img {
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+    border-radius: 6px;
+}
+
+/* 下載欄與操作欄固定寬度 */
+.file-table th:nth-child(4),
+.file-table td:nth-child(4) {
+    min-width: 200px;
+}
+
+.file-table th:nth-child(5),
+.file-table td:nth-child(5) {
+    min-width: 140px;
+}
+
+.file-card-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 20px;
+}
+
+.file-card {
+    background-color: #fffefb;
+    border-radius: 12px;
+    padding: 16px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.file-card img {
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 8px;
+    margin-bottom: 12px;
+}
+
+.file-card .file-name {
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 8px;
+    color: #4b3621;
+}
+
+.file-card .file-time {
+    font-size: 14px;
+    color: #7d6c45;
+    margin-bottom: 12px;
+}
+
+.btn-group {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    margin-bottom: 10px;
+}
+
+.file-btn {
+    flex: 1;
+    min-width: 80px;
+    padding: 8px 12px;
+    font-size: 14px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+    color: #fff;
+}
+
+.btn-download {
+    background-color: #3498db;
+}
+
+.btn-download:hover {
+    background-color: #217dbb;
+}
+
+.btn-download-voice {
+    background-color: #3498db;
+}
+
+.btn-download-voice:hover {
+    background-color: #217dbb;
+}
+
+.btn-rename {
+    background-color: #f39c12;
+}
+
+.btn-rename:hover {
+    background-color: #d68910;
+}
+
+.btn-delete {
+    background-color: #e74c3c;
+}
+
+.btn-delete:hover {
+    background-color: #c0392b;
+}
+
+#goHomeBtn {
+    background: #a08c59;
+    color: white;
+    position: absolute;
+    top: 40px;
+    right: 36px;
+    border: none;
+    border-radius: 6px;
+    padding: 8px 16px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background 0.3s ease;
+}
+
+#goHomeBtn:hover {
+    background: #8c774f;
+}
+
+.filter-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 16px 0;
+    gap: 12px;
+}
+
+#searchInput {
+    flex: 1;
+    padding: 8px 12px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 14px;
+}
+
+#sortSelect {
+    padding: 8px 12px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 14px;
+}
+
+.empty-message {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 300px;
+    width: 600%;
+    color: #666;
+    font-size: 18px;
+}

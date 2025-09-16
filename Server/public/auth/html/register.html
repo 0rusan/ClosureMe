@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>註冊</title>
+  <link rel="stylesheet" href="/auth/css/auth.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;600&display=swap" rel="stylesheet">
+</head>
+
+<body>
+  <div class="background">
+    <img src="/assets/pictures/background.png" alt="background">
+    <div class="overlay"></div>
+  </div>
+
+  <div class="logo-register">
+    <img src="/assets/icons/raw (2).png" alt="ClosureMe Logo">
+  </div>
+
+  <div class="container">
+    <h2>建立新帳號</h2>
+    <input type="text" id="regUsername" placeholder="使用者名稱" />
+    <input type="email" id="regEmail" placeholder="電子郵件" />
+    <input type="password" id="regPassword" placeholder="密碼" />
+    <button id="registerBtn">註冊</button>
+    <div class="link">
+      <a href="/auth/html/login.html">已有帳號？前往登入</a>
+    </div>
+  </div>
+
+  <div id="toast" class="toast"></div>
+  <script src="/utils/toast.js"></script>
+  <script type="module" src="/auth/js/register.js"></script>
+</body>
+
+</html>
