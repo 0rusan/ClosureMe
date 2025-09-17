@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1045 &1
+EditorBuildSettings:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Core.unity
+    guid: 0a067fb6d245ee548a118f51d7d0242f
+  - enabled: 1
+    path: "Assets/\u6703\u8B70\u5BA4/Scenes/\u6700\u7D42\u54C1.unity"
+    guid: 3bb53a031859459449c8de0418d937de
+  - enabled: 1
+    path: "Assets/\u516C\u5712/Scene/\u516C\u5712\u7A76\u6975\u7248.unity"
+    guid: 10ce567f8269981479fe4d2419dee85a
+  - enabled: 1
+    path: "Assets/\u5716\u66F8\u9928/Scene/\u5716\u66F8\u9928.unity"
+    guid: f1a6f0fd2ff3a974db2108af52b60293
+  m_configObjects:
+    Unity.XR.Oculus.Settings: {fileID: 11400000, guid: 60fd86046cd35604486c5dfef4721adb, type: 2}
+    com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 289c1b55c9541489481df5cc06664110, type: 3}
+    com.unity.xr.management.loader_settings: {fileID: 11400000, guid: 43f7bc07437bb0c46b231e7bee8dea4b, type: 2}
+    com.unity.xr.openxr.settings4: {fileID: 11400000, guid: b2df604f8d181c040b2c4ebac003aec7, type: 2}
+  m_UseUCBPForAssetBundles: 0
