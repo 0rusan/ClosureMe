@@ -32,7 +32,7 @@ public class NpcWanderController : MonoBehaviour
     void Update()
     {
         if (aiAnimator != null && aiAnimator.IsConversing())
-            return; // ❗ 若在對話中，不要介入控制動畫
+            return; // 若在對話中，不要介入控制動畫
 
         // 計時器倒數
         timer += Time.deltaTime;

@@ -7,7 +7,7 @@ using System.Text.RegularExpressions;
 public class TTSAPI : MonoBehaviour
 {
     [Header("Server")]
-    public string ttsUrl = "http://192.168.1.102/tts";
+    public string ttsUrl = "http://122.100.76.28:80/tts/tts";
 
     [Header("Audio")]
     public AudioSource audioSource;

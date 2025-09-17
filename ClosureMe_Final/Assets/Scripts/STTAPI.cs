@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 public class STTAPI : MonoBehaviour
 {
     [Header("STT Server")]
-    public string baseUrl = "http://192.168.1.102/tts";
+    public string baseUrl = "http://122.100.76.28:80/tts";
     public string sttEndpoint = "/stt";
 
     [Header("Record")]

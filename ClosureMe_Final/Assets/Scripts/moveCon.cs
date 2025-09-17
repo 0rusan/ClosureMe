@@ -9,7 +9,7 @@ public class moveCon : MonoBehaviour
     private Rigidbody rb;
 
     [Header("輸入欄檢查")]
-    public TMP_InputField playerInputField; // ✅ 從 Inspector 指定輸入欄
+    public TMP_InputField playerInputField; // 從 Inspector 指定輸入欄
 
     void Start()
     {
@@ -29,7 +29,7 @@ public class moveCon : MonoBehaviour
         Vector3 move = moveDir.normalized * walkSpeed;
 
 
-        // ✅ 正確用法：Rigidbody.velocity
+        //正確用法：Rigidbody.velocity
         //b.velocity = new Vector3(move.x, rb.velocity.y, move.z); // 保留 y 軸重力
 
 

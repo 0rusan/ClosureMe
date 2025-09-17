@@ -6,7 +6,7 @@ using System.IO;
 
 public static class HttpModelFetcher
 {
-    private const string MODEL_URL = "http://192.168.1.102/models/AIAgentModel.fbx";
+    private const string MODEL_URL = "http://122.100.76.28:80/models/AIAgentModel.fbx";
     private const string INCOMING_DIR = "Assets/AgentModels/Incoming";
     private static readonly string DEST_FBX = Path.Combine(INCOMING_DIR, "AIAgentModel.fbx").Replace('\\', '/');
     [MenuItem("Tools/Agents/Fetch Latest Model (HTTP) %#F")]
@@ -50,7 +50,7 @@ public static class HttpModelFetcher
     private static void DownloadAndImport(System.Action onDone)
     {
         onComplete = onDone;
-        // 🔴 加上破快取參數與標頭
+        // 加上破快取參數與標頭
         var url = MODEL_URL + "?t=" + System.DateTime.UtcNow.Ticks;
         req = UnityWebRequest.Get(url);
         req.SetRequestHeader("Cache-Control", "no-cache");

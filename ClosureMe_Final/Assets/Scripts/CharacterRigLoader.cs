@@ -43,7 +43,7 @@ public class CharacterRigLoader : MonoBehaviour
         var modelAnimator = modelInstance.GetComponentInChildren<Animator>();
         if (!modelAnimator || !modelAnimator.avatar || !modelAnimator.avatar.isHuman)
         {
-            Debug.LogError("❌ 模型沒有 Humanoid Avatar，請在 Import 設成 Humanoid。");
+            Debug.LogError("模型沒有 Humanoid Avatar，請在 Import 設成 Humanoid。");
             return;
         }
 

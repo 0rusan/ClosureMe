@@ -6,9 +6,9 @@ using System.Collections.Generic;
 public class AIResponseManager : MonoBehaviour
 {
     public DialogueUI dialogueUI;
-    public TalkTrigger talkTrigger; // 🔁 新增引用：回傳狀態給 TalkTrigger
+    public TalkTrigger talkTrigger; // 新增引用：回傳狀態給 TalkTrigger
     public TTSAPI ttsAPI;
-    public string apiUrl = "http://192.168.1.102/chatbot/chat";
+    public string apiUrl = "http://122.100.76.28:80/chatbot/chat";
 
     public void AskAI(string message)
     {
@@ -50,9 +50,9 @@ public class AIResponseManager : MonoBehaviour
 
             }
 
-            // ✅ 無論成功或失敗，通知 TalkTrigger 結束等待
+            // 無論成功或失敗，通知 TalkTrigger 結束等待
             if (talkTrigger != null) talkTrigger.OnAIResponseFinished();
-            // ✅ 顯示 AI 回應，並通知 TalkTrigger
+            // 顯示 AI 回應，並通知 TalkTrigger
         }
     }
 

@@ -15,11 +15,11 @@ public class AutoHumanoidImporter : AssetPostprocessor
 
         var mi = (ModelImporter)assetImporter;
 
-        // ★ 僅使用「本模型」建立 Humanoid
+        // 僅使用「本模型」建立 Humanoid
         mi.animationType = ModelImporterAnimationType.Human;
         mi.avatarSetup = ModelImporterAvatarSetup.CreateFromThisModel;
 
-        // ★ 關掉會造成骨架缺失/合併的選項
+        // 關掉會造成骨架缺失/合併的選項
         mi.optimizeGameObjects = false;   // 取消 Optimize Game Objects
 
         // 其他不必要物件也可不匯入（選擇性）
